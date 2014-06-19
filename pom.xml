@@ -6,17 +6,16 @@
     <groupId>pl.codeleak.beanvalidation11-demo</groupId>
     <artifactId>beanvalidation11-demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <!-- Allows running with pl.codeleak.Application class and embedded Tomcat. -->
+    <packaging>jar</packaging>
 
-    <name>Bean Validation 1.1 Demo</name>
-    <description></description>
+    <name>Spring MVC Bean Validation 1.1 Demo</name>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.1.1.RELEASE</version>
         <relativePath/>
-        <!-- lookup parent from repository -->
     </parent>
 
     <dependencies>
@@ -31,7 +30,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
+            <!--
+                If you choose to have packaging type as 'war', uncomment this line
+                <scope>provided</scope>
+            -->
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
