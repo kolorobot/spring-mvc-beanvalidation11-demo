@@ -1,4 +1,4 @@
-package pl.codeleak.demo.example;
+package pl.codeleak.demo.bettermessages;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;

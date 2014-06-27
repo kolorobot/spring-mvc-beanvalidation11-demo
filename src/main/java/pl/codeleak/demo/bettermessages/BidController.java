@@ -1,4 +1,4 @@
-package pl.codeleak.demo.example;
+package pl.codeleak.demo.bettermessages;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,22 +12,23 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Controller
+@RequestMapping("bettermessages")
 public class BidController {
 
-    @RequestMapping(value = "/")
+    @RequestMapping({"", "/", "bid"})
     public String index(Model model) {
         model.addAttribute("bid", new Bid("John", new Date(), BigDecimal.valueOf(5.00)));
-        return "index";
+        return "bettermessages/bid";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = "bid", method = RequestMethod.POST)
     public String create(@ModelAttribute @Valid Bid bid, Errors errors) {
         if (errors.hasErrors()) {
-            return "index";
+            return "bettermessages/bid";
         }
 
         // create a bid here
 
-        return "redirect:/";
+        return "redirect:bettermessages";
     }
 }
