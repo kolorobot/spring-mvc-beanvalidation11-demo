@@ -1,4 +1,4 @@
-package pl.codeleak.demo.validationgroups;
+package pl.codeleak.demo.globalerrors;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -15,9 +15,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = SamePasswordsValidator.class) // validator
 @Documented
 public @interface SamePasswords {
-	String message() default "passwords do not match"; // default error message
+
+    String message() default "passwords do not match"; // default error message
 
 	Class<?>[] groups() default {}; // required
-	
+
 	Class<? extends Payload>[] payload() default {}; // required
 }

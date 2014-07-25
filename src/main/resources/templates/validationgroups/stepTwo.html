@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/css/bootstrap.min.css}"/>
+    <link href="../../static/css/core.css" rel="stylesheet" media="screen" th:href="@{/css/core.css}" />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="fragments/header :: header">&nbsp;</div>
+<div class="container">
+    <form class="form-narrow form-horizontal" method="post" action="summary.html" th:action="@{/validationgroups/stepTwo}" th:object="${account}">
+        <!--/* Show general error message when form contains errors */-->
+        <th:block th:if="${#fields.hasErrors('${account.*}')}">
+            <div th:replace="fragments/alert :: alert (type='danger', message='Form contains errors. Please try again.')">Alert</div>
+            <ul>
+                <li th:each="err : ${#fields.errors('*')}" th:text="${err}">Error</li>
+            </ul>
+        </th:block>
+        <fieldset>
+            <legend>Create Account - Step 2</legend>
+            <!-- Bidder -->
+            <div class="form-group" th:classappend="${#fields.hasErrors('password')}? 'has-error'">
+                <label for="password" class="col-lg-4 control-label">Password</label>
+                <div class="col-lg-8">
+                    <input type="password" class="form-control" id="password" th:field="*{password}" />
+                    <span class="help-block" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Incorrect</span>
+                </div>
+            </div>
+            <!-- Expires -->
+            <div class="form-group" th:classappend="${#fields.hasErrors('confirmedPassword')}? 'has-error'">
+                <label for="confirmed-password" class="col-lg-4 control-label">Confirm Password</label>
+                <div class="col-lg-8">
+                    <input type="password" class="form-control" id="confirmed-password" th:field="*{confirmedPassword}" />
+                    <span class="help-block" th:if="${#fields.hasErrors('confirmedPassword')}" th:errors="*{confirmedPassword}">Incorrect</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-offset-4 col-lg-8">
+                    <button id="create" type="submit" class="btn btn-default">Next</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <div th:replace="fragments/footer :: footer">&nbsp;</div>
+</div>
+</body>
+</html>
