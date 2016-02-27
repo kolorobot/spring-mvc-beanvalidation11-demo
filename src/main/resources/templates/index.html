@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Hello Spring Boot!</title>
@@ -40,10 +40,14 @@
         <a href="validationgroups/start.html" th:href="@{validationgroups}">Validation groups</a>
     </p>
     <p>
-        <a href="validationgroups/start.html" th:href="@{globalerrors/password}">Global errors</a>
+        <a href="globalerrors/password.html" th:href="@{globalerrors/password}">Global errors</a>
     </p>
 
-    <div th:replace="fragments/footer :: footer">&copy; 2014 The Static Templates</div>
+    <p>
+        <a href="groupsequence/code.html" th:href="@{groupsequence/code}">Group sequence</a>
+    </p>
+
+    <div th:replace="fragments/footer :: footer">&copy; 2016 The Static Templates</div>
 </div>
 </body>
 </html>

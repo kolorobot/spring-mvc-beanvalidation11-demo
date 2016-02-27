@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public class BidControllerTest {
+public class CodeValidationControllerTest {
 
     @Autowired
     private WebApplicationContext wac;
