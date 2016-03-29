@@ -1,7 +1,6 @@
 package pl.codeleak.demo.groupsequence;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,17 +41,32 @@ public class CodeValidationControllerTest {
     }
 
 
-    // FIXME Add valid tests
     @Test
-    @Ignore
     public void postsValidCode() throws Exception {
         this.mockMvc.perform(post("/groupsequence/code")
+            .param("code", "1"))
+                    .andExpect(model().hasNoErrors())
+                    .andExpect(content().string(not(containsString("Form contains errors."))));
+    }
+
+    @Test
+    public void postsInvalidValidCode() throws Exception {
+        this.mockMvc.perform(post("/groupsequence/code")
             .param("code", "42"))
-                    .andExpect(content().string(
-                        not(
-                            containsString("Form contains errors. Please try again.")
-                        )
-                        )
-                    );
+                    .andExpect(model().hasErrors())
+                    .andExpect(model().attributeHasErrors("code"))
+                    .andExpect(model().attributeHasFieldErrorCode("code", "code", "ExistingCode")) // Spring 4.1
+                    .andExpect(content().string(containsString("Form contains errors.")))
+                    .andExpect(content().string(containsString("Code is invalid!")));
+    }
+
+    @Test
+    public void validationFailsOnEmptyCode() throws Exception {
+        this.mockMvc.perform(post("/groupsequence/code")
+            .param("code", ""))
+                    .andExpect(model().hasErrors())
+                    .andExpect(model().attributeHasErrors("code"))
+                    .andExpect(content().string(containsString("Form contains errors. Please try again.")))
+                    .andExpect(content().string(containsString("size must be between 1 and 3")));
     }
 }

@@ -8,9 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
 
-public class GlobalErrorsMatchers extends ModelResultMatchers {
+class GlobalErrorsMatchers extends ModelResultMatchers {
 
-    private GlobalErrorsMatchers() {}
+    private GlobalErrorsMatchers() {
+    }
 
     public static GlobalErrorsMatchers globalErrors() {
         return new GlobalErrorsMatchers();
@@ -20,9 +21,9 @@ public class GlobalErrorsMatchers extends ModelResultMatchers {
         return result -> {
             BindingResult bindingResult = getBindingResult(result.getModelAndView(), attribute);
             bindingResult.getGlobalErrors()
-                .stream()
-                .filter(oe -> attribute.equals(oe.getObjectName()))
-                .forEach(oe -> assertEquals("Expected default message", expectedMessage, oe.getDefaultMessage()));
+                         .stream()
+                         .filter(oe -> attribute.equals(oe.getObjectName()))
+                         .forEach(oe -> assertEquals("Expected default message", expectedMessage, oe.getDefaultMessage()));
         };
     }
 

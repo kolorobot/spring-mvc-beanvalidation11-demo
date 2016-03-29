@@ -14,19 +14,19 @@ public class AccountValidationTest {
     private Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     @Test
-    public void shouldHaveFourConstraintViolationsWhileValidatingBothGroups() {
+    public void has4ViolationsWhileValidatingBothGroups() {
         Account account = new Account();
         Set<ConstraintViolation<Account>> constraintViolations = validator.validate(
-                account, Account.ValidationStepOne.class, Account.ValidationStepTwo.class
+            account, Account.ValidationStepOne.class, Account.ValidationStepTwo.class
         );
         assertThat(constraintViolations).hasSize(4);
     }
 
     @Test
-    public void shouldHaveTwoConstraintViolationsWhileStepOne() {
+    public void has2ViolationsWhileInStepOne() {
         Account account = new Account();
         Set<ConstraintViolation<Account>> constraintViolations = validator.validate(
-                account, Account.ValidationStepOne.class
+            account, Account.ValidationStepOne.class
         );
         assertThat(constraintViolations).hasSize(2);
 

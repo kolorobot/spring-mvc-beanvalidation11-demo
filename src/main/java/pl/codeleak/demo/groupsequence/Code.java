@@ -1,7 +1,5 @@
 package pl.codeleak.demo.groupsequence;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 import javax.validation.GroupSequence;
 import javax.validation.constraints.Size;
 
@@ -15,7 +13,6 @@ interface ValidationOrder {
 @ExistingCode(groups = ValidationOrder.Class.class)
 public class Code {
 
-    @NotBlank(groups = ValidationOrder.Field.class)
     @Size(min = 1, max = 3, groups = ValidationOrder.Field.class)
     private String code;
 
