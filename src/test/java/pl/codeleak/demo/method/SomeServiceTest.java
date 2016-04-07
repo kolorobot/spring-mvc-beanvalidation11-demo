@@ -33,44 +33,44 @@ public class SomeServiceTest {
     @Autowired
     private SomeService service;
 
-@Test
-public void throwsViolationExceptionWhenAllArgumentsInvalid() {
-    assertThatExceptionOfType(ConstraintViolationException.class)
-        .isThrownBy(() -> service.createUser(null, null, null))
-        .matches(e -> e.getConstraintViolations().size() == 3);
-}
+    @Test
+    public void throwsViolationExceptionWhenAllArgumentsInvalid() {
+        assertThatExceptionOfType(ConstraintViolationException.class)
+            .isThrownBy(() -> service.createUser(null, null, null))
+            .matches(e -> e.getConstraintViolations().size() == 3);
+    }
 
-@Test
-public void throwsViolationExceptionWhen2ArgumentsInvalid() {
-    assertThatExceptionOfType(ConstraintViolationException.class)
-        .isThrownBy(() -> service.createUser(null, null, "valid"))
-        .matches(e -> e.getConstraintViolations().size() == 2);
+    @Test
+    public void throwsViolationExceptionWhen2ArgumentsInvalid() {
+        assertThatExceptionOfType(ConstraintViolationException.class)
+            .isThrownBy(() -> service.createUser(null, null, "valid"))
+            .matches(e -> e.getConstraintViolations().size() == 2);
 
-}
+    }
 
 
-@Test
-public void throwsViolationExceptionWhenEmailInvalidArgumentsInvalid() {
-    assertThatExceptionOfType(ConstraintViolationException.class)
-        .isThrownBy(() -> service.createUser("invalid_email", "valid", "valid"))
-        .matches(e -> e.getConstraintViolations().size() == 1)
-        .matches(e -> e.getConstraintViolations().stream()
-                       .allMatch(v -> v.getMessage().equals("not a well-formed email address")));
+    @Test
+    public void throwsViolationExceptionWhenEmailInvalidArgumentsInvalid() {
+        assertThatExceptionOfType(ConstraintViolationException.class)
+            .isThrownBy(() -> service.createUser("invalid_email", "valid", "valid"))
+            .matches(e -> e.getConstraintViolations().size() == 1)
+            .matches(e -> e.getConstraintViolations().stream()
+                           .allMatch(v -> v.getMessage().equals("not a well-formed email address")));
 
-}
+    }
 
-@Test
-public void throwsViolationExceptionWhenReturnValueTooLong() {
-    assertThatExceptionOfType(ConstraintViolationException.class)
-        .isThrownBy(() -> service.createUser("user@domain.com", "too_long_username", "valid"))
-        .matches(e -> e.getConstraintViolations().size() == 1)
-        .matches(e -> e.getConstraintViolations().stream()
-                       .allMatch(v -> v.getMessage().equals("length must be between 3 and 5")));
+    @Test
+    public void throwsViolationExceptionWhenReturnValueTooLong() {
+        assertThatExceptionOfType(ConstraintViolationException.class)
+            .isThrownBy(() -> service.createUser("user@domain.com", "too_long_username", "valid"))
+            .matches(e -> e.getConstraintViolations().size() == 1)
+            .matches(e -> e.getConstraintViolations().stream()
+                           .allMatch(v -> v.getMessage().equals("length must be between 3 and 5")));
 
-}
+    }
 
-@Test
-public void createsUser() {
-    service.createUser("user@domain.com", "valid", "valid");
-}
+    @Test
+    public void createsUser() {
+        service.createUser("user@domain.com", "valid", "valid");
+    }
 }

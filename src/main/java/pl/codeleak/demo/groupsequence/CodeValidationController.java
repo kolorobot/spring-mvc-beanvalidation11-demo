@@ -15,7 +15,7 @@ import pl.codeleak.demo.support.MessageHelper;
 public class CodeValidationController {
 
     @RequestMapping({"", "/", "code"})
-    public String index(Model model) {
+    public String form(Model model) {
         model.addAttribute("code", new Code());
         return "groupsequence/code";
     }

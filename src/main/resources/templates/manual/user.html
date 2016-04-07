@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Hello Spring Boot!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../static/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/css/bootstrap.min.css}"/>
+    <link href="../../static/css/core.css" rel="stylesheet" media="screen" th:href="@{/css/core.css}" />
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+<!-- Header -->
+<div th:replace="fragments/header :: header">&nbsp;</div>
+<div class="container">
+    <!-- /* Handle the flash message */-->
+    <th:block th:if="${message != null}">
+        <!-- /* The message code is returned from the @Controller */ -->
+        <div th:replace="fragments/alert :: alert (type=${#strings.toLowerCase(message.type)}, message=${message.message})">&nbsp;</div>
+    </th:block>
+    <form class="form-narrow form-horizontal" method="post" th:action="@{/manual/user}" th:object="${user}">
+        <!--/* Show general error message when form contains errors */-->
+        <th:block th:if="${#fields.hasErrors('${user.*}')}">
+            <div th:replace="fragments/alert :: alert (type='danger', message='Form contains errors. Please try again.')">Alert</div>
+        </th:block>
+        <fieldset>
+            <legend>Enter the username</legend>
+            <!-- Code -->
+            <div class="form-group" th:classappend="${#fields.hasErrors('username')}? 'has-error'">
+                <label for="user" class="col-lg-4 control-label">Username</label>
+                <div class="col-lg-8">
+                    <input type="text" class="form-control" id="user" placeholder="Username" th:field="*{username}" />
+                    <span class="help-block" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Incorrect</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-lg-offset-4 col-lg-8">
+                    <button id="create" type="submit" class="btn btn-default">Verify</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+    <div th:replace="fragments/footer :: footer">&nbsp;</div>
+</div>
+</body>
+</html>

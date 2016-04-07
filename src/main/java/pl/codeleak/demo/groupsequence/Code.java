@@ -3,17 +3,17 @@ package pl.codeleak.demo.groupsequence;
 import javax.validation.GroupSequence;
 import javax.validation.constraints.Size;
 
-@GroupSequence(value = {ValidationOrder.Field.class, ValidationOrder.Class.class})
+@GroupSequence(value = {ValidationOrder.First.class, ValidationOrder.Next.class})
 interface ValidationOrder {
-    interface Field {}
-    interface Class {}
+    interface First {}
+    interface Next {}
 }
 
 
-@ExistingCode(groups = ValidationOrder.Class.class)
+@ExistingCode(groups = ValidationOrder.Next.class)
 public class Code {
 
-    @Size(min = 1, max = 3, groups = ValidationOrder.Field.class)
+    @Size(min = 1, max = 3, groups = ValidationOrder.First.class)
     private String code;
 
     private transient String token;
